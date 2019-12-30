@@ -44,7 +44,6 @@ server: \
 	--no-fallback \
 	--no-server \
 	--report-unsupported-elements-at-runtime \
-	--initialize-at-build-time \
 	--allow-incomplete-classpath \
 	-J-Xms$(XMS) \
 	-J-Xmx$(XMX)
