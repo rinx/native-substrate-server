@@ -1,0 +1,21 @@
+[
+{
+  "name":"clojure.core.server__init"
+},
+{
+  "name":"clojure.core__init"
+},
+{
+  "name":"org.httpkit.server.AsyncChannel",
+  "fields":[
+    {"name":"closeHandler", "allowUnsafeAccess":true}, 
+    {"name":"closedRan", "allowUnsafeAccess":true}, 
+    {"name":"isHeaderSent", "allowUnsafeAccess":true}, 
+    {"name":"pingHandler", "allowUnsafeAccess":true}, 
+    {"name":"receiveHandler", "allowUnsafeAccess":true}
+  ]
+},
+{
+  "name":"substrate_sample.core__init"
+}
+]

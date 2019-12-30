@@ -1,0 +1,6 @@
+[
+{
+  "name":"substrate_sample.core",
+  "methods":[{"name":"main","parameterTypes":["java.lang.String[]"] }]
+}
+]

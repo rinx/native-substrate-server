@@ -1,0 +1,6 @@
+{:rest-api
+ {:port 8080
+  :prestop-duration 10}
+ :health
+ {:port 8081
+  :prestop-duration 10}}
