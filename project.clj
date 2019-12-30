@@ -12,7 +12,6 @@
                  [org.martinklepsch/clj-http-lite "0.4.3"]
                  [metosin/jsonista "0.2.2"]
                  [camel-snake-kebab "0.4.0"]]
-  :target-path "target/%s"
   :profiles {:dev {:dependencies [[org.clojure/tools.namespace "0.2.11"]
                                   [orchestra "2019.02.06-1"]]
                    :source-paths ["dev"]}
