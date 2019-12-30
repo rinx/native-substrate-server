@@ -28,7 +28,7 @@
       (let [wait-ch (<! cancel-ch)]
         (timbre/info "System shutdown process started...")
         (component/stop system)
-        (>! wait-ch :ok)
+        #_(>! wait-ch :ok)
         (timbre/info "System shutdown process completed.")
         (System/exit 0)))))
 
@@ -44,7 +44,7 @@
 (defn -main [& args]
   (let [cancel-ch (async/chan)
         ctx {:cancel-ch cancel-ch}]
-    (-> (Runtime/getRuntime)
+    #_(-> (Runtime/getRuntime)
         (.addShutdownHook
           (proxy [Thread] []
             (run []
