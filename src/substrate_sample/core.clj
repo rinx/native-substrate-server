@@ -34,20 +34,12 @@
 
 (defn main
   [ctx {:keys [options summary] :as parsed-result}]
-  (let [{:keys [config-filename help?]} options]
+  (let [{:keys [help?]} options]
     (if help?
       (do
         (println config/cli-header)
         (println summary))
-      (let [config (try
-                     (-> config-filename
-                         (io/resource)
-                         (slurp)
-                         (edn/read-string))
-                     (catch Exception _
-                       (println "not found:" config-filename)
-                       {}))]
-        (run ctx config)))))
+      (run ctx {}))))
 
 (defn -main [& args]
   (let [cancel-ch (async/chan)

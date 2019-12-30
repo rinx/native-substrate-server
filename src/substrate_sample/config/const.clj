@@ -12,7 +12,4 @@
 
 (def cli-header "Usage: substrate-sample [options]")
 (def cli-options
-  [["-f" "--file PATH" "config"
-    :id :config-filename
-    :default "config.edn"]
-   ["-h" "--help" :id :help?]])
+  [["-h" "--help" :id :help?]])
