@@ -1,9 +1,17 @@
 [
 {
-  "name":"clojure.core.server__init"
+  "name":"clojure.core.server__init",
+  "allDeclaredConstructors": true,
+  "allPublicConstructors": true,
+  "allDeclaredMethods": true,
+  "allPublicMethods": true
 },
 {
-  "name":"clojure.core__init"
+  "name":"clojure.core__init",
+  "allDeclaredConstructors": true,
+  "allPublicConstructors": true,
+  "allDeclaredMethods": true,
+  "allPublicMethods": true
 },
 {
   "name":"org.httpkit.server.AsyncChannel",
@@ -16,7 +24,11 @@
   ]
 },
 {
-  "name":"substrate_sample.core__init"
+  "name":"substrate_sample.core__init",
+  "allDeclaredConstructors": true,
+  "allPublicConstructors": true,
+  "allDeclaredMethods": true,
+  "allPublicMethods": true
 },
 {
   "name":"java.lang.Class",

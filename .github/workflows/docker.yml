@@ -25,7 +25,7 @@ jobs:
       run: |
         docker build -t rinx/native-substrate-server . --build-arg GRAALVM_VERSION=${GRAALVM_VERSION}
       env:
-        GRAALVM_VERSION: '19.3.0.2-java11'
+        GRAALVM_VERSION: '19.3.0.2-java8'
     - name: Login to DockerHub
       run: |
         echo ${DOCKERHUB_PASS} | docker login --username ${DOCKERHUB_USER} --password-stdin

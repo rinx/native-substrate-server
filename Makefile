@@ -45,7 +45,6 @@ server: \
 	--no-server \
 	--report-unsupported-elements-at-runtime \
 	--allow-incomplete-classpath \
-	--initialize-at-build-time=clojure.lang \
 	-J-Xms$(XMS) \
 	-J-Xmx$(XMX)
 
