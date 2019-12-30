@@ -7,6 +7,8 @@
     {"pattern":"clojure/core/server__init.class"}, 
     {"pattern":"clojure/core__init.class"}, 
     {"pattern":"substrate_sample/core.clj"}, 
-    {"pattern":"substrate_sample/core__init.class"}
+    {"pattern":"substrate_sample/core__init.class"}, 
+    {"pattern":"sun/net/idn/uidna.spp"}, 
+    {"pattern":"sun/text/resources/unorm.icu"}
   ]
 }
