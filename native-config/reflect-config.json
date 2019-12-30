@@ -8,14 +8,28 @@
 {
   "name":"org.httpkit.server.AsyncChannel",
   "fields":[
-    {"name":"closeHandler", "allowUnsafeAccess":true}, 
-    {"name":"closedRan", "allowUnsafeAccess":true}, 
-    {"name":"isHeaderSent", "allowUnsafeAccess":true}, 
-    {"name":"pingHandler", "allowUnsafeAccess":true}, 
+    {"name":"closeHandler", "allowUnsafeAccess":true},
+    {"name":"closedRan", "allowUnsafeAccess":true},
+    {"name":"isHeaderSent", "allowUnsafeAccess":true},
+    {"name":"pingHandler", "allowUnsafeAccess":true},
     {"name":"receiveHandler", "allowUnsafeAccess":true}
   ]
 },
 {
   "name":"substrate_sample.core__init"
+},
+{
+  "name":"java.lang.Class",
+  "allDeclaredConstructors": true,
+  "allPublicConstructors": true,
+  "allDeclaredMethods": true,
+  "allPublicMethods": true
+},
+{
+  "name":"clojure.lang.PersistentList",
+  "allDeclaredConstructors": true,
+  "allPublicConstructors": true,
+  "allDeclaredMethods": true,
+  "allPublicMethods": true
 }
 ]
