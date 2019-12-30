@@ -16,11 +16,10 @@
     (Integer/parseInt s)
     (catch Exception _ nil)))
 
-(defn run [ctx config]
+(defn run [ctx]
   (timbre/set-level! :info)
   (let [cancel-ch (:cancel-ch ctx)
-        opts (-> config
-                 (->> (merge-with merge config/default-opts))
+        opts (-> config/default-opts
                  (into {:cancel-ch cancel-ch}))
         system (system/system opts)]
     (component/start system)
@@ -39,15 +38,7 @@
       (do
         (println config/cli-header)
         (println summary))
-      (let [config (try
-                     (-> config-filename
-                         (io/resource)
-                         (slurp)
-                         (edn/read-string))
-                     (catch Exception _
-                       (println "not found:" config-filename)
-                       {}))]
-        (run ctx config)))))
+      (run ctx))))
 
 (defn -main [& args]
   (let [cancel-ch (async/chan)
