@@ -37,9 +37,6 @@ server: \
 	-J-Dclojure.compiler.direct-linking=true \
 	-H:Log=registerResource: \
 	-H:ConfigurationFileDirectories=$(NATIVE_IMAGE_CONFIG_OUTPUT_DIR) \
-	--enable-url-protocols=http,https \
-	--enable-all-security-services \
-	-H:+JNI \
 	--verbose \
 	--no-fallback \
 	--no-server \
