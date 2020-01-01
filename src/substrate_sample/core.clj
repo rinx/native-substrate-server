@@ -1,7 +1,6 @@
 (ns substrate-sample.core
   (:require
    [clojure.core.async :as async :refer [<! >! <!! >!!]]
-   [com.stuartsierra.component :as component]
    [substrate-sample.usecase.system :as system]
    #_[taoensso.timbre :as timbre])
   (:gen-class))
@@ -24,11 +23,11 @@
         opts (-> default-opts
                  (into {:cancel-ch cancel-ch}))
         system (system/system opts)]
-    (component/start system)
     (async/go
       (let [wait-ch (<! cancel-ch)]
         #_(timbre/info "System shutdown process started...")
-        (component/stop system)
+        ((:system system))
+        ((:health system))
         (>! wait-ch :ok)
         #_(timbre/info "System shutdown process completed.")
         (System/exit 0)))))
