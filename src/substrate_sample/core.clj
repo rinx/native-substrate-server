@@ -1,6 +1,6 @@
 (ns substrate-sample.core
   (:require
-   [clojure.core.async :as async :refer [<! >! <!! >!!]]
+   #_[clojure.core.async :as async :refer [<! >! <!! >!!]]
    [substrate-sample.usecase.system :as system]
    #_[taoensso.timbre :as timbre])
   (:gen-class))
@@ -23,7 +23,7 @@
         opts (-> default-opts
                  (into {:cancel-ch cancel-ch}))
         system (system/system opts)]
-    (async/go
+    #_(async/go
       (let [wait-ch (<! cancel-ch)]
         #_(timbre/info "System shutdown process started...")
         ((:system system))
@@ -33,9 +33,9 @@
         (System/exit 0)))))
 
 (defn -main [& args]
-  (let [cancel-ch (async/chan)
-        ctx {:cancel-ch cancel-ch}]
-    (-> (Runtime/getRuntime)
+  (let [#_#_cancel-ch (async/chan)
+        ctx {:cancel-ch nil #_cancel-ch}]
+    #_(-> (Runtime/getRuntime)
         (.addShutdownHook
           (proxy [Thread] []
             (run []
