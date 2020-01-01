@@ -33,15 +33,16 @@ server: \
 	-jar $(TARGET_JAR) \
 	-H:Name=server \
 	-H:+ReportExceptionStackTraces \
-	-J-Dclojure.spec.skip-macros=true \
 	-J-Dclojure.compiler.direct-linking=true \
 	-H:Log=registerResource: \
 	-H:ConfigurationFileDirectories=$(NATIVE_IMAGE_CONFIG_OUTPUT_DIR) \
+	--enable-url-protocols=http \
 	--verbose \
 	--no-fallback \
 	--no-server \
 	--report-unsupported-elements-at-runtime \
 	--allow-incomplete-classpath \
+	--initialize-at-build-time \
 	-J-Xms$(XMS) \
 	-J-Xmx$(XMX)
 

@@ -1,44 +1,37 @@
 (ns substrate-sample.core
   (:require
-   [clojure.spec.alpha :as spec]
    [clojure.core.async :as async :refer [<! >! <!! >!!]]
-   [clojure.tools.cli :as cli]
-   [clojure.edn :as edn]
-   [clojure.java.io :as io]
    [com.stuartsierra.component :as component]
-   [substrate-sample.config.const :as config]
    [substrate-sample.usecase.system :as system]
-   [taoensso.timbre :as timbre])
+   #_[taoensso.timbre :as timbre])
   (:gen-class))
 
-(defn parse-int [s]
-  (try
-    (Integer/parseInt s)
-    (catch Exception _ nil)))
+(set! *warn-on-reflection* true)
+
+(def default-opts
+  {:rest-api
+   {:name "REST API"
+    :port 8080
+    :prestop-duration 10}
+   :health
+   {:name "Health"
+    :port 8081
+    :prestop-duration 10}})
 
 (defn run [ctx]
-  (timbre/set-level! :info)
+  #_(timbre/set-level! :info)
   (let [cancel-ch (:cancel-ch ctx)
-        opts (-> config/default-opts
+        opts (-> default-opts
                  (into {:cancel-ch cancel-ch}))
         system (system/system opts)]
     (component/start system)
     (async/go
       (let [wait-ch (<! cancel-ch)]
-        (timbre/info "System shutdown process started...")
+        #_(timbre/info "System shutdown process started...")
         (component/stop system)
         (>! wait-ch :ok)
-        (timbre/info "System shutdown process completed.")
+        #_(timbre/info "System shutdown process completed.")
         (System/exit 0)))))
-
-(defn main
-  [ctx {:keys [options summary] :as parsed-result}]
-  (let [{:keys [config-filename help?]} options]
-    (if help?
-      (do
-        (println config/cli-header)
-        (println summary))
-      (run ctx))))
 
 (defn -main [& args]
   (let [cancel-ch (async/chan)
@@ -50,6 +43,4 @@
               (let [wait-ch (async/chan)]
                 (async/put! cancel-ch wait-ch)
                 (<!! wait-ch))))))
-    (-> args
-        (cli/parse-opts config/cli-options)
-        (->> (main ctx)))))
+    (run ctx)))
