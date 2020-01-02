@@ -16,6 +16,7 @@ COPY project.clj project.clj
 RUN lein deps
 
 COPY src src
+COPY resources resources
 
 RUN lein uberjar
 
