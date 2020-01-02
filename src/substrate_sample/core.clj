@@ -24,19 +24,16 @@
   (let [opts default-opts
         system (system/system opts)]
     (component/start system)
-    (reset! shutdown-hook
-            (fn []
-              (timbre/info "System shutdown process started...")
-              (component/stop system)
-              (timbre/info "System shutdown process completed.")
-              (System/exit 0)))))
+    (reset! shutdown-hook #(component/stop system))))
 
 (defn -main [& args]
   (-> (Runtime/getRuntime)
       (.addShutdownHook
         (proxy [Thread] []
           (run []
+            (timbre/info "System shutdown process started...")
             (let [shutdown-hook (deref shutdown-hook)]
               (when shutdown-hook
-                (shutdown-hook)))))))
+                (shutdown-hook)))
+            (timbre/info "System shutdown process completed.")))))
   (run))

@@ -1,8 +1,10 @@
 (ns substrate-sample.service.health
   (:require
+   [clojure.java.io :as io]
    [com.stuartsierra.component :as component]
    [taoensso.timbre :as timbre]
    [compojure.core :as compojure :refer [defroutes GET]]
+   [compojure.route :as route]
    [org.httpkit.server :as server]))
 
 (defn health [req]
@@ -11,7 +13,8 @@
    :body    "health check completed"})
 
 (defroutes router
-  (GET "/health" [] health))
+  (GET "/health" [] health)
+  (route/not-found (slurp (io/resource "not-found.html"))))
 
 (defrecord HealthComponent [options]
   component/Lifecycle

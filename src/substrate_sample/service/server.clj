@@ -1,8 +1,10 @@
 (ns substrate-sample.service.server
   (:require
+   [clojure.java.io :as io]
    [com.stuartsierra.component :as component]
    [taoensso.timbre :as timbre]
    [compojure.core :as compojure :refer [defroutes GET]]
+   [compojure.route :as route]
    [org.httpkit.server :as server]))
 
 (defn root [req]
@@ -11,7 +13,8 @@
    :body    "this is root"})
 
 (defroutes router
-  (GET "/" [] root))
+  (GET "/" [] root)
+  (route/not-found (slurp (io/resource "not-found.html"))))
 
 (defrecord ServerComponent [options]
   component/Lifecycle
