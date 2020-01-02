@@ -1,8 +1,12 @@
 (ns substrate-sample.usecase.system
   (:require
+   [com.stuartsierra.component :as component]
    [substrate-sample.service.server :as server]
    [substrate-sample.service.health :as health]))
 
-(defn system [{:keys [rest-api health cancel-ch] :as conf}]
-  {:system (server/start-server rest-api)
-   :health (health/start-health health)})
+(defn system [{:keys [rest-api health] :as conf}]
+  (component/system-map
+   :server (server/start-server rest-api)
+   :health (component/using
+            (health/start-health health)
+            {:server :server})))
