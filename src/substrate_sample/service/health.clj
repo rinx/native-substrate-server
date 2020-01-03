@@ -10,7 +10,7 @@
 (defn health [req]
   {:status  200
    :headers {"Content-Type" "text/plane"}
-   :body    "health check completed"})
+   :body    "health"})
 
 (defroutes router
   (GET "/health" [] health)

@@ -1,0 +1,12 @@
+{:rest-api
+ {:name "REST API"
+  :port 8080
+  :prestop-duration 10
+  :routes [{:route "/"
+            :body-file "/etc/server/index.html"}
+           {:route "/help"
+            :body "help"}]}
+ :health
+ {:name "Health"
+  :port 8081
+  :prestop-duration 10}}

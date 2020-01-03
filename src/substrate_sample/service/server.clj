@@ -3,25 +3,44 @@
    [clojure.java.io :as io]
    [com.stuartsierra.component :as component]
    [taoensso.timbre :as timbre]
-   [compojure.core :as compojure :refer [defroutes GET]]
+   [compojure.core :as compojure]
    [compojure.route :as route]
    [org.httpkit.server :as server]))
 
-(defn root [req]
-  {:status  200
-   :headers {"Content-Type" "text/plane"}
-   :body    "this is root"})
+(defn handler-fn [body]
+  (fn [req]
+    {:status 200
+     :headers {"Content-Type" "text/html"}
+     :body body}))
 
-(defroutes router
-  (GET "/" [] root)
-  (route/not-found (slurp (io/resource "not-found.html"))))
+(defn ->route [r]
+  (let [route (:route r)
+        body-file (when (and (:body-file r)
+                             (-> (io/file (:body-file r))
+                                 (.exists)))
+                    (slurp (:body-file r)))
+        body (:body r)
+        response (or body-file body)]
+    (when (and route response)
+      (timbre/infof "Registering route '%s'", route)
+      (compojure/make-route :get route (handler-fn response)))))
+
+(defn routes->router [routes]
+  (->> routes
+       (map ->route)
+       (filter some?)
+       (cons (route/not-found (slurp (io/resource "not-found.html"))))
+       (reverse)
+       (apply compojure/routes)))
 
 (defrecord ServerComponent [options]
   component/Lifecycle
   (start [this]
-    (let [server-name (:name options)]
+    (let [server-name (:name options)
+          routes (:routes options)]
       (timbre/infof "Starting server: %s..." server-name)
-      (let [server (server/run-server router options)
+      (let [router (routes->router routes)
+            server (server/run-server router options)
             port (:port options)]
         (timbre/infof "Server %s started with port: %s" server-name port)
         (timbre/infof "Starting server %s completed." server-name)

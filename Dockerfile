@@ -41,5 +41,7 @@ FROM scratch
 LABEL maintainer "rinx <rintaro.okamura@gmail.com>"
 
 COPY --from=packer /server /server
+COPY assets/server /etc/server
 
-CMD ["/server"]
+ENTRYPOINT ["/server"]
+CMD ["/etc/server/config.edn"]
