@@ -1,6 +1,6 @@
 ARG GRAALVM_VERSION=latest
 
-FROM oracle/graalvm-ce:${GRAALVM_VERSION} as graalvm
+FROM oracle/graalvm-ce:${GRAALVM_VERSION} AS graalvm
 
 LABEL maintainer "rinx <rintaro.okamura@gmail.com>"
 
@@ -26,10 +26,20 @@ COPY Makefile Makefile
 
 RUN make
 
-FROM ubuntu:latest
+FROM alpine:edge AS packer
+
+RUN apk update \
+    && apk upgrade \
+    && apk --update-cache add --no-cache \
+    upx
+
+COPY --from=graalvm /substrate/server /server
+RUN upx --lzma --best /server
+
+FROM scratch
 
 LABEL maintainer "rinx <rintaro.okamura@gmail.com>"
 
-COPY --from=graalvm /substrate/server /server
+COPY --from=packer /server /server
 
 CMD ["/server"]
