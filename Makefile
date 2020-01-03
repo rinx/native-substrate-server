@@ -40,6 +40,7 @@ server: \
 	--verbose \
 	--no-fallback \
 	--no-server \
+	--static \
 	--report-unsupported-elements-at-runtime \
 	--allow-incomplete-classpath \
 	--initialize-at-build-time \

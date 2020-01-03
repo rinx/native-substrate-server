@@ -26,7 +26,7 @@ COPY Makefile Makefile
 
 RUN make
 
-FROM ubuntu:latest
+FROM scratch
 
 LABEL maintainer "rinx <rintaro.okamura@gmail.com>"
 
