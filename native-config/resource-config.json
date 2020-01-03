@@ -7,6 +7,7 @@
     {"pattern":"clojure/core/server__init.class"},
     {"pattern":"clojure/core__init.class"},
     {"pattern":"substrate_sample/core.clj"},
-    {"pattern":"substrate_sample/core__init.class"}
+    {"pattern":"substrate_sample/core__init.class"},
+    {"pattern":"*.html"}
   ]
 }
