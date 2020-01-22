@@ -16,9 +16,13 @@
     :prestop-duration 10
     :routes [{:route "/"
               :body "root"}]}
-   :health
-   {:name "Health"
-    :port 8081
+   :liveness
+   {:name "liveness"
+    :port 3000
+    :prestop-duration 10}
+   :readiness
+   {:name "readiness"
+    :port 3001
     :prestop-duration 10}})
 
 (def shutdown-hook (atom nil))
