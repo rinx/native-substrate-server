@@ -19,11 +19,15 @@
    :liveness
    {:name "liveness"
     :port 3000
-    :prestop-duration 10}
+    :prestop-duration 10
+    :routes [{:route "/liveness"
+              :body "ok"}]}
    :readiness
    {:name "readiness"
     :port 3001
-    :prestop-duration 10}})
+    :prestop-duration 10
+    :routes [{:route "/readiness"
+              :body "ok"}]}})
 
 (def shutdown-hook (atom nil))
 
