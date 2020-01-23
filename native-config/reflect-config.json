@@ -6,16 +6,22 @@
   "name":"clojure.core__init"
 },
 {
-  "name":"org.httpkit.server.AsyncChannel",
+  "name":"com.oath.halodb.Hasher$Murmur3Hash",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"java.nio.Buffer",
   "fields":[
-    {"name":"closeHandler", "allowUnsafeAccess":true}, 
-    {"name":"closedRan", "allowUnsafeAccess":true}, 
-    {"name":"isHeaderSent", "allowUnsafeAccess":true}, 
-    {"name":"pingHandler", "allowUnsafeAccess":true}, 
-    {"name":"receiveHandler", "allowUnsafeAccess":true}
+    {"name":"address", "allowUnsafeAccess":true}, 
+    {"name":"capacity", "allowUnsafeAccess":true}, 
+    {"name":"limit", "allowUnsafeAccess":true}
   ]
 },
 {
   "name":"substrate_sample.core__init"
+},
+{
+  "name":"sun.misc.Unsafe",
+  "fields":[{"name":"theUnsafe"}]
 }
 ]

@@ -1,13 +1,12 @@
 {
   "resources":[
-    {"pattern":"META-INF/services/jdk.vm.ci.hotspot.HotSpotJVMCIBackendFactory"},
-    {"pattern":"META-INF/services/jdk.vm.ci.services.JVMCIServiceLocator"},
-    {"pattern":"clojure/core.clj"},
-    {"pattern":"clojure/core/server.clj"},
-    {"pattern":"clojure/core/server__init.class"},
-    {"pattern":"clojure/core__init.class"},
-    {"pattern":"substrate_sample/core.clj"},
-    {"pattern":"substrate_sample/core__init.class"},
-    {"pattern":"not-found.html"}
+    {"pattern":"clojure/core.clj"}, 
+    {"pattern":"clojure/core/server.clj"}, 
+    {"pattern":"clojure/core/server__init.class"}, 
+    {"pattern":"clojure/core__init.class"}, 
+    {"pattern":"com/sun/jna/linux-x86-64/libjnidispatch.so"}, 
+    {"pattern":"not-found.html"}, 
+    {"pattern":"substrate_sample/core.clj"}, 
+    {"pattern":"substrate_sample/core__init.class"}
   ]
 }
