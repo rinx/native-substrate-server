@@ -2,7 +2,7 @@
   (:import [com.oracle.svm.core.annotate Substitute TargetClass]
            #_[com.oath.halodb NativeMemoryAllocator]))
 
-(defprotocol NativeMemoryAllocator
+(defprotocol NativeMemoryAllocatorSubstitute
   (allocate [this sizea])
   (free [this peer])
   (getTotalAllocated [this]))
@@ -10,7 +10,7 @@
 (deftype ^{TargetClass {:targetClass "com.oath.halodb.JNANativeAllocator"}
            Substitute true}
   JNANativeAllocatorSubstitution []
-  NativeMemoryAllocator
+  NativeMemoryAllocatorSubstitute
   (^{Substitute true
      Override true}
     allocate [this size]
