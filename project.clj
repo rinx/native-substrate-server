@@ -8,8 +8,7 @@
                  [com.taoensso/timbre "4.10.0"]
                  [http-kit "2.3.0"]
                  [compojure "1.6.1"]]
-  :profiles {:dev {:dependencies [[org.clojure/tools.namespace "0.2.11"]
-                                  [orchestra "2019.02.06-1"]]
+  :profiles {:dev {:dependencies [[org.clojure/tools.namespace "0.2.11"]]
                    :source-paths ["dev"]}
              :uberjar {:aot :all
                        :main substrate-sample.core}})
