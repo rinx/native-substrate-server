@@ -11,4 +11,5 @@
   :profiles {:dev {:dependencies [[org.clojure/tools.namespace "0.2.11"]]
                    :source-paths ["dev"]}
              :uberjar {:aot :all
-                       :main substrate-sample.core}})
+                       :main substrate-sample.core}}
+  :repl-options {:timeout 120000})

@@ -32,7 +32,7 @@
 (def timbre-config
   {:output-fn
    (fn [{:keys [level] :as data}]
-     (timbre/color-str 
+     (timbre/color-str
        (case level
          :trace :cyan
          :debug :blue
@@ -47,7 +47,7 @@
 
 (defn run [config]
   (timbre/merge-config! timbre-config)
-  (timbre/set-level! :info)
+  (timbre/set-level! :debug)
   (let [opts (or config default-opts)
         system (system/system opts)]
     (component/start system)
@@ -58,6 +58,7 @@
       (.addShutdownHook
        (proxy [Thread] []
          (run []
+           (timbre/warn "ShutdownHook is called.")
            (timbre/info "System shutdown process started...")
            (let [shutdown-hook (deref shutdown-hook)]
              (when shutdown-hook

@@ -22,7 +22,7 @@
         body (:body r)
         response (or body-file body)]
     (when (and route response)
-      (timbre/infof "Registering route '%s'", route)
+      (timbre/debugf "Registering route '%s'", route)
       (compojure/make-route :get route (handler-fn response)))))
 
 (defn routes->router [routes]
