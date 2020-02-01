@@ -21,7 +21,9 @@
     :port 3000
     :prestop-duration 10
     :routes [{:route "/liveness"
-              :body "ok"}]}
+              :body "ok"}
+             {:route "/shutdown"
+              :shutdown true}]}
    :readiness
    {:name "readiness"
     :port 3001

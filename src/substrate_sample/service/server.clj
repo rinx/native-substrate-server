@@ -13,6 +13,12 @@
      :headers {"Content-Type" "text/html"}
      :body body}))
 
+(defn shutdown-fn [_]
+  (System/exit 0)
+  {:status 200
+   :headers {"Content-Type" "text/plain"}
+   :body "shutdown ok"})
+
 (defn ->route [r]
   (let [route (:route r)
         body-file (when (and (:body-file r)
@@ -20,10 +26,13 @@
                                  (.exists)))
                     (slurp (:body-file r)))
         body (:body r)
-        response (or body-file body)]
-    (when (and route response)
+        response (or body-file body)
+        handler (if (:shutdown r)
+                  shutdown-fn
+                  (handler-fn response))]
+    (when (and route handler)
       (timbre/debugf "Registering route '%s'", route)
-      (compojure/make-route :get route (handler-fn response)))))
+      (compojure/make-route :get route handler))))
 
 (defn routes->router [routes]
   (->> routes
