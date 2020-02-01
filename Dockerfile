@@ -36,12 +36,12 @@ RUN apk update \
 COPY --from=graalvm /substrate/server /server
 RUN upx --lzma --best /server
 
-FROM alpine:edge
+FROM scratch
 
 LABEL maintainer "rinx <rintaro.okamura@gmail.com>"
 
 COPY --from=packer /server /server
 COPY assets/server /etc/server
 
-ENTRYPOINT ["exec"]
-CMD ["/server /etc/server/config.edn"]
+ENTRYPOINT ["/server"]
+CMD ["/etc/server/config.edn"]
