@@ -43,5 +43,6 @@ LABEL maintainer "rinx <rintaro.okamura@gmail.com>"
 COPY --from=packer /server /server
 COPY assets/server /etc/server
 
-ENTRYPOINT ["exec"]
-CMD ["/server /etc/server/config.edn"]
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
