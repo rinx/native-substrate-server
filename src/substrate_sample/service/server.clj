@@ -15,7 +15,9 @@
      :body body}))
 
 (defn shutdown-fn [_]
-  (System/exit 0)
+  (async/thread
+    (Thread/sleep 100)
+    (System/exit 0))
   {:status 200
    :headers {"Content-Type" "text/plain"}
    :body "shutdown ok"})
