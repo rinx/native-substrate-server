@@ -37,7 +37,7 @@ jobs:
       - name: Build native image
         run: |
           make
-          upx --lzma --best server
+          # upx --lzma --best server
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
@@ -52,7 +52,7 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: server
-          path: tmp
+          path: ./
       - name: Build the Docker image
         run: |
           docker build -t rinx/native-substrate-server .
