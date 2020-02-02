@@ -55,6 +55,7 @@ jobs:
           path: ./
       - name: Build the Docker image
         run: |
+          chmod a+x server
           docker build -t rinx/native-substrate-server .
       - name: Login to DockerHub
         run: |
