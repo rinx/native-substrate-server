@@ -15,7 +15,7 @@
      :body body}))
 
 (defn shutdown-fn [_]
-  (async/thread
+  (future
     (Thread/sleep 100)
     (System/exit 0))
   {:status 200
