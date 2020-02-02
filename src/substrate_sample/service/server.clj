@@ -1,6 +1,7 @@
 (ns substrate-sample.service.server
   (:require
    [clojure.java.io :as io]
+   [clojure.core.async :as async :refer [<! >! <!! >!!]]
    [com.stuartsierra.component :as component]
    [taoensso.timbre :as timbre]
    [compojure.core :as compojure]

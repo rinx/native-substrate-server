@@ -33,5 +33,15 @@ jobs:
         DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
         DOCKERHUB_PASS: ${{ secrets.DOCKERHUB_PASS }}
     - name: push to DockerHub
+      if: github.ref == 'refs/heads/master'
       run: |
         docker push rinx/native-substrate-server
+        docker tag rinx/native-substrate-server rinx/native-substrate-server:nightly
+        docker push rinx/native-substrate-server:nightly
+    - name: push to DockerHub
+      if: github.event_name == 'pull_request'
+      run: |
+        docker push rinx/native-substrate-server
+        pr_num=`cat $GITHUB_EVENT_PATH | jq -r ".number"`
+        docker tag rinx/native-substrate-server rinx/native-substrate-server:pr-${pr_num}
+        docker push rinx/native-substrate-server:pr-${pr_num}
