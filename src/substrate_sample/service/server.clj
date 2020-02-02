@@ -16,7 +16,6 @@
 
 (defn shutdown-fn [_]
   (async/go
-    (<! (async/timeout 100))
     (System/exit 0))
   {:status 200
    :headers {"Content-Type" "text/plain"}
