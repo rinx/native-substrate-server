@@ -12,6 +12,9 @@ on:
     paths:
       - src/**
       - project.clj
+      - Makefile
+      - native-config
+      - .github/**
 
 jobs:
   build-linux:
