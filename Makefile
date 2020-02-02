@@ -1,5 +1,5 @@
 XMS = 2g
-XMX = 8g
+XMX = 7g
 
 NATIVE_IMAGE_CONFIG_OUTPUT_DIR=native-config
 
