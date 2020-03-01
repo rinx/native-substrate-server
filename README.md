@@ -5,6 +5,12 @@
 
 This is a native server template. it can be configured by edn-formatted files.
 
+## Build
+
+```
+$ make server
+```
+
 ## Development
 
 To start your server, execute in REPL,
