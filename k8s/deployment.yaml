@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-app
+spec:
+  selector:
+    matchLabels:
+      app: server-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: server-app
+    spec:
+      containers:
+      - name: server
+        image: rinx/native-substrate-server:nightly
+        livenessProbe:
+          httpGet:
+            path: /liveness
+            port: liveness
+            scheme: HTTP
+          initialDelaySeconds: 2
+          periodSeconds: 3
+          successThreshold: 1
+          failureThreshold: 3
+          timeoutSeconds: 2
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: readiness
+            scheme: HTTP
+          initialDelaySeconds: 2
+          periodSeconds: 3
+          successThreshold: 1
+          failureThreshold: 3
+          timeoutSeconds: 2
+        ports:
+          - containerPort: 8080
+            name: rest
+          - containerPort: 3000
+            name: liveness
+          - containerPort: 3001
+            name: readiness
+        volumeMounts:
+          - mountPath: /etc/server
+            name: server-config
+        resources:
+          limits:
+            cpu: 200m
+      - name: lifecycle
+        image: curlimages/curl:latest
+        command:
+          - "/bin/sh"
+          - "-c"
+          - "while true; do sleep 3600; done"
+        lifecycle:
+          postStart:
+            exec:
+              command:
+                - "/bin/sh"
+                - "-c"
+                - "echo started"
+          preStop:
+            exec:
+              command:
+                - "/bin/sh"
+                - "-c"
+                - "curl http://localhost:3000/shutdown"
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: server-config
+        name: server-config

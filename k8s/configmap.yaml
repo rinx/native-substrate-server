@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: server-config
+data:
+  config.edn: |
+    {:rest-api
+     {:name "REST API"
+      :port 8080
+      :prestop-duration 10
+      :routes [{:route "/"
+                :body-file "/etc/server/index.html"}
+               {:route "/text"
+                :body "text body"}]}
+     :liveness
+     {:name "liveness"
+      :port 3000
+      :prestop-duration 10
+      :routes [{:route "/liveness"
+                :body "ok"}
+               {:route "/shutdown"
+                :shutdown true}]}
+     :readiness
+     {:name "readiness"
+      :port 3001
+      :prestop-duration 10
+      :routes [{:route "/readiness"
+                :body "ok"}]}}
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <title>Index</title>
+        <meta charset="utf-8">
+      </head>
+      <body>
+        <h1>Index page</h1>
+      </body>
+    </html>
