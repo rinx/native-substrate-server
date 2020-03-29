@@ -1,0 +1,31 @@
+(ns substrate-sample.service.halodb
+  (:require
+   [com.stuartsierra.component :as component]
+   [taoensso.timbre :as timbre]
+   [clj-halodb.core :as halodb]))
+
+(System/setProperty "org.caffinitas.ohc.allocator" "unsafe")
+
+(def halodb-dir
+  ".halodb")
+(def halodb-options
+  (halodb/options
+    {:max-file-size 131072
+     :sync-write true}))
+
+(defrecord HaloDBComponent [options]
+  component/Lifecycle
+  (start [this]
+    (timbre/infof "Starting HaloDB...")
+    (let [db (halodb/open halodb-dir halodb-options)]
+      (assoc this :db db)))
+  (stop [this]
+    (timbre/infof "Stopping HaloDB...")
+    (let [db (:db this)]
+      (when db
+        (halodb/close db))
+      (assoc this :db nil))))
+
+(defn start-halodb [options]
+  (map->HaloDBComponent
+    {:options options}))

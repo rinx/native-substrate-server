@@ -23,21 +23,19 @@ jobs:
       - uses: actions/checkout@v1
       - uses: rinx/setup-graalvm-ce@v0.0.1
         with:
-          graalvm-version: 19.3.1
+          graalvm-version: 20.0.0
           java-version: java8
       - name: Install dependencies
         run: |
           gu install native-image
           curl -o lein https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
           chmod a+x lein
+          sudo ./lein version
           sudo apt-get update && sudo apt-get install -y upx
-      - name: Build uberjar
+          gu install native-image
+      - name: Build native-image
         run: |
-          ./lein uberjar
-      - name: Build native image
-        run: |
-          make
-          # upx --lzma --best server
+          ./lein native-image
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:

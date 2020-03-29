@@ -13,10 +13,6 @@ clean:
 	rm -f server
 	rm -rf target
 
-.PHONY: install/native-image
-install/native-image:
-	gu install native-image
-
 .PHONY: profile/native-image-config
 profile/native-image-config: \
 	$(NATIVE_IMAGE_CONFIG_OUTPUT_DIR) \
@@ -26,26 +22,3 @@ profile/native-image-config: \
 
 $(NATIVE_IMAGE_CONFIG_OUTPUT_DIR):
 	mkdir -p $@
-
-server: \
-	$(TARGET_JAR)
-	native-image \
-	-jar $(TARGET_JAR) \
-	-H:Name=server \
-	-H:+ReportExceptionStackTraces \
-	-J-Dclojure.compiler.direct-linking=true \
-	-H:Log=registerResource: \
-	-H:ConfigurationFileDirectories=$(NATIVE_IMAGE_CONFIG_OUTPUT_DIR) \
-	--enable-url-protocols=http \
-	--verbose \
-	--no-fallback \
-	--no-server \
-	--static \
-	--report-unsupported-elements-at-runtime \
-	--allow-incomplete-classpath \
-	--initialize-at-build-time \
-	-J-Xms$(XMS) \
-	-J-Xmx$(XMX)
-
-$(TARGET_JAR): src
-	lein uberjar

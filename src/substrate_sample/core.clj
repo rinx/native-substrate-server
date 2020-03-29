@@ -15,7 +15,8 @@
     :port 8080
     :prestop-duration 10
     :routes [{:route "/"
-              :body "root"}]}
+              :body "root"
+              :count true}]}
    :liveness
    {:name "liveness"
     :port 3000
