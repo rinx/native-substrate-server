@@ -36,6 +36,7 @@ jobs:
       - name: Build native-image
         run: |
           ./lein native-image
+          mv target/server ./server
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
