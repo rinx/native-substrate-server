@@ -6,13 +6,11 @@
     :refer [refresh refresh-all]]
    [clojure.spec.alpha :as spec]
    [clojure.core.async :as async]
-   [orchestra.spec.test :as stest]
    [com.stuartsierra.component :as component]
    [taoensso.timbre :as timbre]
    [substrate-sample.config.const :as config]
    [substrate-sample.usecase.system :as system]))
 
-(stest/instrument)
 (timbre/set-level! :debug)
 
 (def system nil)
